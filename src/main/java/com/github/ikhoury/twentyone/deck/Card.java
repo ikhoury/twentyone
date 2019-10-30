@@ -5,6 +5,10 @@ import java.util.Collection;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
+/**
+ * Represents the possible instances of a card in the game along with
+ * the number of points it can give the player
+ */
 public enum Card {
 
     ACE(asList(1, 11)),

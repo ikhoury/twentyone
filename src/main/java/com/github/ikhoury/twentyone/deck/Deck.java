@@ -7,6 +7,9 @@ import java.util.Optional;
 
 import static java.util.Collections.shuffle;
 
+/**
+ * The deck holds the cards that will be distributed to players throughout the game
+ */
 public class Deck {
 
     private static final int NUMBER_OF_CARD_SUITS = 4;
