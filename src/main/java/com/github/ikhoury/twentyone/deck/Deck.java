@@ -1,4 +1,4 @@
-package com.github.ikhoury.twentyone;
+package com.github.ikhoury.twentyone.deck;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
