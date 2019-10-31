@@ -5,12 +5,13 @@ import com.github.ikhoury.twentyone.deck.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
+
 public class Player {
 
     private final String name;
     private List<Card> hand;
     private int points;
-    private boolean bust;
     private boolean stand;
 
     public Player(String name) {
@@ -31,11 +32,15 @@ public class Player {
     }
 
     public boolean isBust() {
-        return bust;
+        return points > BUST_THRESHOLD;
     }
 
     public boolean isStand() {
         return stand;
+    }
+
+    public boolean canHit() {
+        return !isBust() && !isStand();
     }
 
     public void hit(Card card, int points) {
@@ -45,9 +50,5 @@ public class Player {
 
     public void stand() {
         this.stand = true;
-    }
-
-    public void bust() {
-        this.bust = true;
     }
 }
