@@ -11,12 +11,12 @@ A simple implementation of the Dutch variant of Blackjack.
 - Players can choose 3 actions:
     - Stand: Hold total and stop playing.
     - Hit: Ask for a card.
-    - Split: Choose two identical cards and removes them. The player then places two separate bets.
+    - Split: Choose two identical cards and remove them. The player then places two separate bets.
 - Players can end their turn in two states:
     - Stand: Still playing against the bank with a total.
     - Bust: Lost because they have over 21 points.
-- After all players end their turn, and their are players standing, the bank must play.
-- The bank must _hit_ when he has a total of 16 points or less.
+- After all players end their turn, and there are players standing, the bank must play.
+- The bank must _hit_ with a total of 16 points or less.
 - The bank must _stand_ with a total of 17 points or more.
 - If the bank and player have the same number of points, the bank wins.
 - If the bank has more than 21 points, he is bust and all standing players win.
