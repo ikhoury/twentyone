@@ -1,5 +1,8 @@
 package com.github.ikhoury.twentyone;
 
+/**
+ * Game constants that are bound to the game rules
+ */
 public class Constants {
 
     public static final int MAX_PLAYERS_PER_GAME = 3;

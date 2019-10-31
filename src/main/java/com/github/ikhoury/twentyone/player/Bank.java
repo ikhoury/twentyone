@@ -2,6 +2,9 @@ package com.github.ikhoury.twentyone.player;
 
 import static com.github.ikhoury.twentyone.Constants.BANK_STAND_THRESHOLD;
 
+/**
+ * The bank is a special player that must keep on playing until it reaches its stand threshold
+ */
 public class Bank extends Player {
 
     private static final String BANK_NAME = "The Bank";
