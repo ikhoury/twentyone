@@ -11,7 +11,7 @@ A simple implementation of the Dutch variant of Blackjack.
 - Players can choose 3 actions:
     - Stand: Hold total and stop playing.
     - Hit: Ask for a card.
-    - Split: Choose two identical cards and remove them. The player then places two separate bets.
+    - Split: Choose two identical cards and remove them. The player then places two separate actions.
 - Players can end their turn in two states:
     - Stand: Still playing against the bank with a total.
     - Bust: Lost because they have over 21 points.
