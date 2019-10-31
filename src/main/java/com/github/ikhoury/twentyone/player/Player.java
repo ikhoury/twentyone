@@ -8,11 +8,16 @@ import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * A player can perform any of the actions allowed in his turn
+ * (hit, stand, or split). Each action can transition the player to a different state
+ * (can hit, standing, busted).
+ */
 public class Player {
 
     private final String name;
     private List<CardHit> hits;
-    private boolean stand;
+    private boolean standing;
 
     public Player(String name) {
         this.name = name;
@@ -35,16 +40,16 @@ public class Player {
                 .sum();
     }
 
-    public boolean isBust() {
+    public boolean isBusted() {
         return getPoints() > BUST_THRESHOLD;
     }
 
-    public boolean isStand() {
-        return stand;
+    public boolean isStanding() {
+        return standing;
     }
 
     public boolean canHit() {
-        return !isBust() && !isStand();
+        return !isBusted() && !isStanding();
     }
 
     public boolean canSplit() {
@@ -80,7 +85,7 @@ public class Player {
     }
 
     public void stand() {
-        this.stand = true;
+        this.standing = true;
     }
 
     public void split(Card card) {

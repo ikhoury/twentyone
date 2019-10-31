@@ -43,14 +43,14 @@ public class PlayerTest {
     public void stands() {
         player.stand();
 
-        assertThat(player.isStand(), is(true));
+        assertThat(player.isStanding(), is(true));
     }
 
     @Test
     public void bustsWhenOverLimit() {
         player.hit(ACE_CARD, BUST_POINTS);
 
-        assertThat(player.isBust(), is(true));
+        assertThat(player.isBusted(), is(true));
     }
 
     @Test

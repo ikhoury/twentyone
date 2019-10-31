@@ -16,7 +16,7 @@ public class Bank extends Player {
     }
 
     @Override
-    public boolean isStand() {
-        return super.isStand() || getPoints() >= BANK_STAND_THRESHOLD;
+    public boolean isStanding() {
+        return super.isStanding() || getPoints() >= BANK_STAND_THRESHOLD;
     }
 }
