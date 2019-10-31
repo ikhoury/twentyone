@@ -1,7 +1,5 @@
-package com.github.ikhoury.twentyone;
+package com.github.ikhoury.twentyone.deck;
 
-import com.github.ikhoury.twentyone.deck.Card;
-import com.github.ikhoury.twentyone.deck.Deck;
 import org.junit.Before;
 import org.junit.Test;
 
