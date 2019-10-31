@@ -33,7 +33,7 @@ public class Deck {
         shuffle(cards);
     }
 
-    public Optional<Card> getNextCard() {
+    public Optional<Card> nextCard() {
         if (cards.isEmpty()) {
             return Optional.empty();
         }

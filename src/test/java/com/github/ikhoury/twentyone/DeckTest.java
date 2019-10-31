@@ -46,7 +46,7 @@ public class DeckTest {
     public void removesFirstCardFromDeck() {
         Card expectedFirstCard = deckCards.get(deckCards.size() - 1);
 
-        Card firstCard = deck.getNextCard().orElse(null);
+        Card firstCard = deck.nextCard().orElse(null);
 
         assertThat(firstCard, equalTo(expectedFirstCard));
         assertThat(deckCards, hasSize(DECK_SIZE - 1));
