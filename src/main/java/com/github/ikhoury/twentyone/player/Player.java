@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * A player can perform any of the actions allowed in his turn
  * (hit, stand, or split). Each action can transition the player to a different state
- * (can hit, standing, busted).
+ * (can hit, can split, standing, or busted).
  */
 public class Player {
 
@@ -107,6 +107,10 @@ public class Player {
         }
     }
 
+    /**
+     * Since the player can choose from possible points when a card is added to his hand,
+     * we need to remember the choice because the card and its points must be removed on a split.
+     */
     private static class CardHit {
 
         private Card card;
