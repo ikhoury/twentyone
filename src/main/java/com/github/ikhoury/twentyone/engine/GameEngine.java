@@ -10,6 +10,11 @@ import java.util.function.Predicate;
 import static com.github.ikhoury.twentyone.Constants.MAX_PLAYERS_PER_GAME;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * A game encapsulates a bank, a deck of cards, and a list of players competing against each other and the bank.
+ * The game engine runs the main event loop and ends the game by choosing the winners.
+ * A limited number of players is allowed per game.
+ */
 public class GameEngine implements Runnable {
 
     private static final Predicate<Player> STILL_STANDING = Player::isStanding;
