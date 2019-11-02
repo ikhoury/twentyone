@@ -10,6 +10,11 @@ import com.github.ikhoury.twentyone.player.Player;
 import static com.github.ikhoury.twentyone.Constants.AVAILABLE_TURNS_AFTER_SPLIT;
 import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
 
+/**
+ * Plays a single player's turn.
+ * Can swipe cards from the deck depending on the player's choice or compete between the player and the bank.
+ * The player is notified after the turn if he is busted.
+ */
 public class TurnEngine {
 
     private final Deck deck;
@@ -46,9 +51,9 @@ public class TurnEngine {
 
     void competeWithBank(Player player, Bank bank) {
         if (player.getPoints() > bank.getPoints()) {
-            interactionDriver.win(player);
+            interactionDriver.win(player, bank);
         } else {
-            interactionDriver.win(bank);
+            interactionDriver.win(bank, player);
         }
     }
 
