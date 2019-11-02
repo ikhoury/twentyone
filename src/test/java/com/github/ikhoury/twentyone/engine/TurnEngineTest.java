@@ -137,34 +137,4 @@ public class TurnEngineTest {
 
         verify(interactionDriver).bust(bank);
     }
-
-    @Test
-    public void bankWinsPlayerIfEqualPoints() {
-        when(bank.getPoints()).thenReturn(CHOSEN_POINTS);
-        when(player.getPoints()).thenReturn(CHOSEN_POINTS);
-
-        turnEngine.competeWithBank(player, bank);
-
-        verify(interactionDriver).win(bank, player);
-    }
-
-    @Test
-    public void bankWinsIfGreaterThanPlayerPoints() {
-        when(bank.getPoints()).thenReturn(CHOSEN_POINTS);
-        when(player.getPoints()).thenReturn(CHOSEN_POINTS - 2);
-
-        turnEngine.competeWithBank(player, bank);
-
-        verify(interactionDriver).win(bank, player);
-    }
-
-    @Test
-    public void bankLosesIfLessThanPlayerPoints() {
-        when(bank.getPoints()).thenReturn(CHOSEN_POINTS - 1);
-        when(player.getPoints()).thenReturn(CHOSEN_POINTS);
-
-        turnEngine.competeWithBank(player, bank);
-
-        verify(interactionDriver).win(player, bank);
-    }
 }

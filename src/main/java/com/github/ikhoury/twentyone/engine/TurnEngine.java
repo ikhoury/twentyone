@@ -15,7 +15,7 @@ import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
 
 /**
  * Plays a single player's turn.
- * Can swipe cards from the deck depending on the player's choice or compete between the player and the bank.
+ * Can swipe cards from the deck depending on the player's choice.
  * The player is notified after the turn if he is busted.
  */
 public class TurnEngine {
@@ -50,14 +50,6 @@ public class TurnEngine {
         }
 
         notifyIfBusted(player);
-    }
-
-    void competeWithBank(Player player, Bank bank) {
-        if (player.getPoints() > bank.getPoints()) {
-            interactionDriver.win(player, bank);
-        } else {
-            interactionDriver.win(bank, player);
-        }
     }
 
     private void playHitWith(Bank bank, Card card) {
