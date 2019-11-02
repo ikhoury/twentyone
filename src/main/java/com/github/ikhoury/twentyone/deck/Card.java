@@ -1,6 +1,7 @@
 package com.github.ikhoury.twentyone.deck;
 
 import java.util.Collection;
+import java.util.OptionalInt;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -34,5 +35,11 @@ public enum Card {
 
     public Collection<Integer> getPossiblePoints() {
         return possiblePoints;
+    }
+
+    public OptionalInt getMinimumPoints() {
+        return getPossiblePoints().stream()
+                .mapToInt(Integer::intValue)
+                .min();
     }
 }
