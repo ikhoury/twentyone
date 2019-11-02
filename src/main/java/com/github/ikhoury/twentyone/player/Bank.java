@@ -15,11 +15,11 @@ public class Bank extends Player {
 
     @Override
     public boolean canHit() {
-        return super.canHit() && getPoints() < BANK_STAND_THRESHOLD;
+        return super.canHit() && getPoints() <= BANK_STAND_THRESHOLD;
     }
 
     @Override
     public boolean isStanding() {
-        return super.isStanding() || getPoints() > BANK_STAND_THRESHOLD;
+        return (super.isStanding() || getPoints() > BANK_STAND_THRESHOLD) && !isBusted();
     }
 }

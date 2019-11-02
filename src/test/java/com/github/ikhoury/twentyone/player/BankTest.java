@@ -24,6 +24,12 @@ public class BankTest {
     }
 
     @Test
+    public void canHitIfAtThreshold() {
+        bank.hit(Card.ACE, BANK_STAND_THRESHOLD);
+        assertThat(bank.canHit(), is(true));
+    }
+
+    @Test
     public void standsIfOverThreshold() {
         bank.hit(Card.ACE, BANK_STAND_THRESHOLD + 1);
         assertThat(bank.isStanding(), is(true));
