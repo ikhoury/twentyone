@@ -4,12 +4,12 @@ import com.github.ikhoury.twentyone.deck.Card;
 import com.github.ikhoury.twentyone.player.Player;
 
 /**
- * This interfaces user game interactions with the user.
+ * This interfaces game interactions with the user.
  * This should be used when requesting information from the user or displaying game progress.
  */
 public interface InteractionDriver {
 
-    PlayerChoice askForChoiceFrom(Player player);
+    PlayerChoice askChoiceFrom(Player player);
 
     int showCardAndChoosePoints(Card card);
 
@@ -23,5 +23,5 @@ public interface InteractionDriver {
 
     void winAll(Player won);
 
-    Card chooseCardToSplitFrom(Player player);
+    Card chooseCardToSplitFor(Player player);
 }

@@ -34,7 +34,7 @@ public class TurnEngine {
     }
 
     void playTurn(Player player) {
-        PlayerChoice choice = interactionDriver.askForChoiceFrom(player);
+        PlayerChoice choice = interactionDriver.askChoiceFrom(player);
 
         switch (choice) {
             case HIT:
@@ -44,7 +44,7 @@ public class TurnEngine {
                 player.stand();
                 break;
             case SPLIT:
-                Card splitCard = interactionDriver.chooseCardToSplitFrom(player);
+                Card splitCard = interactionDriver.chooseCardToSplitFor(player);
                 playSplitWith(player, splitCard);
                 break;
         }

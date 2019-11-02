@@ -42,7 +42,7 @@ public class TurnEngineTest {
 
     @Test
     public void playerChoosesHit() {
-        when(interactionDriver.askForChoiceFrom(player))
+        when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
 
         turnEngine.playTurn(player);
@@ -53,7 +53,7 @@ public class TurnEngineTest {
 
     @Test
     public void bustPlayerIfGetsBusted() {
-        when(interactionDriver.askForChoiceFrom(player))
+        when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
         when(player.isBusted()).thenReturn(true);
 
@@ -64,7 +64,7 @@ public class TurnEngineTest {
 
     @Test
     public void playerChoosesStand() {
-        when(interactionDriver.askForChoiceFrom(player))
+        when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.STAND);
 
         turnEngine.playTurn(player);
@@ -74,9 +74,9 @@ public class TurnEngineTest {
 
     @Test
     public void playerChoosesSplitThenPlaysTwoHitTurns() {
-        when(interactionDriver.askForChoiceFrom(player))
+        when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.SPLIT, PlayerChoice.HIT);
-        when(interactionDriver.chooseCardToSplitFrom(player))
+        when(interactionDriver.chooseCardToSplitFor(player))
                 .thenReturn(NEXT_CARD);
         when(player.canHit()).thenReturn(true);
 
@@ -84,7 +84,7 @@ public class TurnEngineTest {
 
         verify(player).split(NEXT_CARD);
         verify(interactionDriver).showSplitCardAndPoints(player, NEXT_CARD);
-        verify(interactionDriver, times(TURNS_TO_PLAY_AFTER_SPLIT + 1)).askForChoiceFrom(player);
+        verify(interactionDriver, times(TURNS_TO_PLAY_AFTER_SPLIT + 1)).askChoiceFrom(player);
         verify(player, times(TURNS_TO_PLAY_AFTER_SPLIT)).hit(NEXT_CARD, CHOSEN_POINTS);
     }
 
