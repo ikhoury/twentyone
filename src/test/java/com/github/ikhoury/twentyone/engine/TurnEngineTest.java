@@ -73,7 +73,7 @@ public class TurnEngineTest {
     }
 
     @Test
-    public void playerChoosesSplitThenPlaysTwoHitTurns() {
+    public void playerChoosesSplitThenPlaysHitTurns() {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.SPLIT, PlayerChoice.HIT);
         when(interactionDriver.chooseCardToSplitFor(player))
