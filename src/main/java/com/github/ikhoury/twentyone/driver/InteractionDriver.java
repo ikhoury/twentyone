@@ -1,7 +1,6 @@
 package com.github.ikhoury.twentyone.driver;
 
 import com.github.ikhoury.twentyone.deck.Card;
-import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
 
 /**
@@ -14,7 +13,9 @@ public interface InteractionDriver {
 
     int showCardAndChoosePoints(Card card);
 
-    void showBankHitCard(Bank bank, Card card, int points);
+    void showHitCardAndPoints(Player player, Card card, int points);
+
+    void showSplitCardAndPoints(Player player, Card card);
 
     void bust(Player player);
 

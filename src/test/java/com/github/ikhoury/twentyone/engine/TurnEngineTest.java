@@ -48,10 +48,11 @@ public class TurnEngineTest {
         turnEngine.playTurn(player);
 
         verify(player).hit(NEXT_CARD, CHOSEN_POINTS);
+        verify(interactionDriver).showHitCardAndPoints(player, NEXT_CARD, CHOSEN_POINTS);
     }
 
     @Test
-    public void playerChoosesHitAndIsBusted() {
+    public void bustPlayerIfGetsBusted() {
         when(interactionDriver.askForChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
         when(player.isBusted()).thenReturn(true);
@@ -82,6 +83,7 @@ public class TurnEngineTest {
         turnEngine.playTurn(player);
 
         verify(player).split(NEXT_CARD);
+        verify(interactionDriver).showSplitCardAndPoints(player, NEXT_CARD);
         verify(interactionDriver, times(TURNS_TO_PLAY_AFTER_SPLIT + 1)).askForChoiceFrom(player);
         verify(player, times(TURNS_TO_PLAY_AFTER_SPLIT)).hit(NEXT_CARD, CHOSEN_POINTS);
     }
@@ -119,16 +121,16 @@ public class TurnEngineTest {
     }
 
     @Test
-    public void bankWithPointsAtBustThresholdDoesNotHit() {
+    public void bankWithPointsAtBustThresholdStillHits() {
         when(bank.getPoints()).thenReturn(BUST_THRESHOLD);
 
         turnEngine.playTurn(bank);
 
-        verify(bank, never()).hit(any(Card.class), anyInt());
+        verify(bank).hit(any(Card.class), anyInt());
     }
 
     @Test
-    public void bustBankIfIsBusted() {
+    public void bustBankIfGetsBusted() {
         when(bank.isBusted()).thenReturn(true);
 
         turnEngine.playTurn(bank);

@@ -7,6 +7,9 @@ import com.github.ikhoury.twentyone.driver.PlayerChoice;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
 
+import java.util.Optional;
+import java.util.OptionalInt;
+
 import static com.github.ikhoury.twentyone.Constants.AVAILABLE_TURNS_AFTER_SPLIT;
 import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
 
@@ -58,6 +61,17 @@ public class TurnEngine {
     }
 
     private void playHitWith(Bank bank, Card card) {
+        OptionalInt pointsToAddOpt = findBestPossiblePointsThatWontBust(bank, card)
+                .map(OptionalInt::of)
+                .orElse(card.getMinimumPoints());
+
+        pointsToAddOpt.ifPresent(pointsToAdd -> {
+            bank.hit(card, pointsToAdd);
+            interactionDriver.showHitCardAndPoints(bank, card, pointsToAdd);
+        });
+    }
+
+    private Optional<Integer> findBestPossiblePointsThatWontBust(Bank bank, Card card) {
         Integer pointsToAdd = null;
         int currentPoints = bank.getPoints();
 
@@ -69,19 +83,18 @@ public class TurnEngine {
             }
         }
 
-        if (pointsToAdd != null) {
-            bank.hit(card, pointsToAdd);
-            interactionDriver.showBankHitCard(bank, card, pointsToAdd);
-        }
+        return Optional.ofNullable(pointsToAdd);
     }
 
     private void playHitWith(Player player, Card card) {
         int points = interactionDriver.showCardAndChoosePoints(card);
         player.hit(card, points);
+        interactionDriver.showHitCardAndPoints(player, card, points);
     }
 
     private void playSplitWith(Player player, Card card) {
         player.split(card);
+        interactionDriver.showSplitCardAndPoints(player, card);
 
         for (int i = 0; i < AVAILABLE_TURNS_AFTER_SPLIT; i++) {
             playTurn(player);
