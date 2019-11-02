@@ -34,6 +34,10 @@ public class Player {
                 .collect(toList());
     }
 
+    public List<CardHit> getHits() {
+        return hits;
+    }
+
     public int getPoints() {
         return hits.stream()
                 .mapToInt(CardHit::getPoints)
@@ -111,7 +115,7 @@ public class Player {
      * Since the player can choose from possible points when a card is added to his hand,
      * we need to remember the choice because the card and its points must be removed on a split.
      */
-    private static class CardHit {
+    public static class CardHit {
 
         private Card card;
         private int points;
