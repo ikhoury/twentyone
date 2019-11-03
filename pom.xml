@@ -14,6 +14,7 @@
         <java.version>11</java.version>
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.release.version>2.5.3</maven.release.version>
+        <maven.assembly.version>3.1.1</maven.assembly.version>
         <jacoco.version>0.8.5</jacoco.version>
         <sonar.version>3.7.0.1746</sonar.version>
 
@@ -69,6 +70,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven.assembly.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
