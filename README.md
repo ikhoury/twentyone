@@ -35,3 +35,5 @@ The game is a java application that is packaged into a runnable `JAR` using mave
 Clone the repository and in the root directory run `mvn package`.
 You will get a runnable `JAR` created under the `target/` folder ending with the prefix `jar-with-dependencies`.
 Run the game using `java -jar`.
+
+**NOTE**: Java version 11 is required.
