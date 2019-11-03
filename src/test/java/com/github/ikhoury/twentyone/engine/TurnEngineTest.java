@@ -52,6 +52,17 @@ public class TurnEngineTest {
     }
 
     @Test
+    public void playerChoosesHitOnEmptyDeckDoesNothing() {
+        when(interactionDriver.askChoiceFrom(player))
+                .thenReturn(PlayerChoice.HIT);
+        when(deck.nextCard()).thenReturn(Optional.empty());
+
+        turnEngine.playTurn(player);
+
+        verify(player, only()).isBusted();
+    }
+
+    @Test
     public void bustPlayerIfGetsBusted() {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
@@ -105,12 +116,8 @@ public class TurnEngineTest {
     }
 
     @Test
-    public void bankWithPointsHitsCardWithHighestNewSumLessThanBustThreshold() {
-        int expectedPoints = CARD_WITH_MORE_THAN_ONE_POINTS.getPossiblePoints()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .min()
-                .getAsInt();
+    public void bankWithPointsHitsCardWithHigherNewSumLessThanBustThreshold() {
+        int expectedPoints = CARD_WITH_MORE_THAN_ONE_POINTS.getMinimumPoints().getAsInt();
 
         when(bank.getPoints()).thenReturn(BUST_THRESHOLD - expectedPoints);
         when(deck.nextCard()).thenReturn(Optional.of(CARD_WITH_MORE_THAN_ONE_POINTS));
@@ -127,6 +134,18 @@ public class TurnEngineTest {
         turnEngine.playTurn(bank);
 
         verify(bank).hit(any(Card.class), anyInt());
+    }
+
+    @Test
+    public void bankWithPointsOverBustThresholdChoosesSmallestPoints() {
+        int expectedPoints = CARD_WITH_MORE_THAN_ONE_POINTS.getMinimumPoints().getAsInt();
+
+        when(bank.getPoints()).thenReturn(BUST_THRESHOLD + 1);
+        when(deck.nextCard()).thenReturn(Optional.of(CARD_WITH_MORE_THAN_ONE_POINTS));
+
+        turnEngine.playTurn(bank);
+
+        verify(bank).hit(CARD_WITH_MORE_THAN_ONE_POINTS, expectedPoints);
     }
 
     @Test
