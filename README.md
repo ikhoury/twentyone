@@ -32,6 +32,6 @@ A simple implementation of the Dutch variant of Blackjack.
 
 ## Running the game
 The game is a java application that is packaged into a runnable `JAR` using maven.
-Clone the repository and then in the root directory run `mvn package`.
+Clone the repository and in the root directory run `mvn package`.
 You will get a runnable `JAR` created under the `target/` folder ending with the prefix `jar-with-dependencies`.
 Run the game using `java -jar`.
