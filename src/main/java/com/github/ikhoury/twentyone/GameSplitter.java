@@ -28,6 +28,9 @@ class GameSplitter {
             List<Player> currentPlayers = new ArrayList<>(playersChunk);
             Deck deck = new Deck();
             Bank bank = new Bank();
+
+            deck.shuffleCards();
+
             TurnEngine turnEngine = new TurnEngine(deck, interactionDriver);
             GameEngine gameEngine = new GameEngine(bank, currentPlayers, interactionDriver, turnEngine);
 
