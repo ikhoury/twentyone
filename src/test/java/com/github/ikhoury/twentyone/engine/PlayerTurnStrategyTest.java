@@ -1,7 +1,5 @@
 package com.github.ikhoury.twentyone.engine;
 
-import com.github.ikhoury.twentyone.deck.Deck;
-import com.github.ikhoury.twentyone.driver.InteractionDriver;
 import com.github.ikhoury.twentyone.driver.PlayerChoice;
 import com.github.ikhoury.twentyone.player.Player;
 import org.junit.Before;
@@ -19,18 +17,16 @@ import static org.mockito.Mockito.*;
 public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
 
     @Mock
-    private Deck deck;
-    @Mock
-    private InteractionDriver interactionDriver;
-    @Mock
     private Player player;
 
     @InjectMocks
     private PlayerTurnStrategy strategy;
 
+    @Override
     @Before
     public void setUp() {
-        when(deck.nextCard()).thenReturn(Optional.of(NEXT_CARD));
+        super.setUp();
+
         when(interactionDriver.showCardAndChoosePoints(NEXT_CARD))
                 .thenReturn(CHOSEN_POINTS);
     }
