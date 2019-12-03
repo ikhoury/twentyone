@@ -24,27 +24,27 @@ public class PlayerTurnStrategy implements TurnStrategy {
 
         switch (choice) {
             case HIT:
-                deck.nextCard().ifPresent(card -> playHitWith(player, card));
+                deck.nextCard().ifPresent(card -> hit(player, card));
                 break;
             case STAND:
                 player.stand();
                 break;
             case SPLIT:
                 Card splitCard = interactionDriver.chooseCardToSplitFor(player);
-                playSplitWith(player, splitCard);
+                split(player, splitCard);
                 break;
         }
 
         interactionDriver.notifyIfBusted(player);
     }
 
-    private void playHitWith(Player player, Card card) {
+    private void hit(Player player, Card card) {
         int points = interactionDriver.showCardAndChoosePoints(card);
         player.hit(card, points);
         interactionDriver.showHitCardAndPoints(player, card, points);
     }
 
-    private void playSplitWith(Player player, Card card) {
+    private void split(Player player, Card card) {
         player.split(card);
         interactionDriver.showSplitCardAndPoints(player, card);
 

@@ -22,11 +22,11 @@ public class BankTurnStrategy implements TurnStrategy {
 
     @Override
     public void playTurn(Player player) {
-        deck.nextCard().ifPresent(card -> playHitWith(player, card));
+        deck.nextCard().ifPresent(card -> hit(player, card));
         interactionDriver.notifyIfBusted(player);
     }
 
-    private void playHitWith(Player player, Card card) {
+    private void hit(Player player, Card card) {
         OptionalInt pointsToAddOpt = findBestPossiblePointsThatWontBust(player, card)
                 .map(OptionalInt::of)
                 .orElse(card.getMinimumPoints());
