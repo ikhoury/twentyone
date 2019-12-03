@@ -62,7 +62,7 @@ public class GameEngine implements Runnable {
 
         do {
             playing = findPlayersThatAre(STILL_PLAYING);
-            playing.forEach(turnEngine::playTurn);
+            playing.forEach(playerStrategy::playTurn);
         } while (!playing.isEmpty());
     }
 

@@ -54,7 +54,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, times(2)).playTurn(player);
+        verify(strategy, times(2)).playTurn(player);
     }
 
     @Test
