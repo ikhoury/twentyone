@@ -58,19 +58,16 @@ public class TurnEngineTest {
         when(deck.nextCard()).thenReturn(Optional.empty());
 
         turnEngine.playTurn(player);
-
-        verify(player, only()).isBusted();
     }
 
     @Test
     public void bustPlayerIfGetsBusted() {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
-        when(player.isBusted()).thenReturn(true);
 
         turnEngine.playTurn(player);
 
-        verify(interactionDriver).bust(player);
+        verify(interactionDriver).notifyIfBusted(player);
     }
 
     @Test
@@ -150,10 +147,8 @@ public class TurnEngineTest {
 
     @Test
     public void bustBankIfGetsBusted() {
-        when(bank.isBusted()).thenReturn(true);
-
         turnEngine.playTurn(bank);
 
-        verify(interactionDriver).bust(bank);
+        verify(interactionDriver).notifyIfBusted(bank);
     }
 }

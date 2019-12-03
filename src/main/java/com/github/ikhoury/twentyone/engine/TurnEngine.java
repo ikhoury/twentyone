@@ -30,7 +30,7 @@ public class TurnEngine {
 
     void playTurn(Bank bank) {
         deck.nextCard().ifPresent(card -> playHitWith(bank, card));
-        notifyIfBusted(bank);
+        interactionDriver.notifyIfBusted(bank);
     }
 
     void playTurn(Player player) {
@@ -49,7 +49,7 @@ public class TurnEngine {
                 break;
         }
 
-        notifyIfBusted(player);
+        interactionDriver.notifyIfBusted(player);
     }
 
     private void playHitWith(Bank bank, Card card) {
@@ -94,12 +94,6 @@ public class TurnEngine {
             if (!player.canHit()) {
                 break;
             }
-        }
-    }
-
-    private void notifyIfBusted(Player player) {
-        if (player.isBusted()) {
-            interactionDriver.bust(player);
         }
     }
 }
