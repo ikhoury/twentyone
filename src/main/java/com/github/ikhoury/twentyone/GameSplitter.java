@@ -2,8 +2,7 @@ package com.github.ikhoury.twentyone;
 
 import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.driver.InteractionDriver;
-import com.github.ikhoury.twentyone.engine.GameEngine;
-import com.github.ikhoury.twentyone.engine.TurnEngine;
+import com.github.ikhoury.twentyone.engine.*;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
 
@@ -32,7 +31,10 @@ class GameSplitter {
             deck.shuffleCards();
 
             TurnEngine turnEngine = new TurnEngine(deck, interactionDriver);
-            GameEngine gameEngine = new GameEngine(bank, currentPlayers, interactionDriver, turnEngine);
+            TurnStrategy playerStrategy = new PlayerTurnStrategy(deck, interactionDriver);
+            TurnStrategy bankStrategy = new BankTurnStrategy(deck, interactionDriver);
+
+            GameEngine gameEngine = new GameEngine(bank, currentPlayers, interactionDriver, turnEngine, playerStrategy, bankStrategy);
 
             gameEngines.add(gameEngine);
             playersChunk.clear();
