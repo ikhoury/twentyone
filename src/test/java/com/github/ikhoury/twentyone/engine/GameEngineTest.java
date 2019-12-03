@@ -21,10 +21,14 @@ public class GameEngineTest {
 
     private static final int PLAYER_POINTS = 10;
 
-    @Mock private Player player;
-    @Mock private Bank bank;
-    @Mock private InteractionDriver interactionDriver;
-    @Mock private TurnEngine turnEngine;
+    @Mock
+    private Player player;
+    @Mock
+    private Bank bank;
+    @Mock
+    private InteractionDriver interactionDriver;
+    @Mock
+    private TurnStrategy strategy;
 
     private GameEngine gameEngine;
 
@@ -33,12 +37,12 @@ public class GameEngineTest {
         List<Player> players = new ArrayList<>();
         players.add(player);
 
-        gameEngine = new GameEngine(bank, players, interactionDriver, turnEngine);
+        gameEngine = new GameEngine(bank, players, interactionDriver, strategy, strategy);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotCreateGameMoreThanMaxPlayers() {
-        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, turnEngine);
+        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
     }
 
     @Test
@@ -48,7 +52,8 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, times(2)).playTurn(player);
+        verify(strategy, times(2)).playTurn(player);
+        verify(interactionDriver, times(2)).notifyIfBusted(player);
     }
 
     @Test
@@ -59,7 +64,8 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, times(2)).playTurn(bank);
+        verify(strategy, times(2)).playTurn(bank);
+        verify(interactionDriver, times(2)).notifyIfBusted(bank);
     }
 
     @Test
@@ -68,7 +74,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, never()).playTurn(bank);
+        verify(strategy, never()).playTurn(bank);
         verify(interactionDriver).winAll(bank);
     }
 
