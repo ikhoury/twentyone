@@ -27,8 +27,6 @@ public interface InteractionDriver {
 
     void showSplitCardAndPoints(Player player, Card card);
 
-    void bust(Player player);
-
     void notifyIfBusted(Player player);
 
     void win(Player won, Player lost);

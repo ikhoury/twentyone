@@ -88,11 +88,6 @@ public class ConsoleDriver implements InteractionDriver {
     }
 
     @Override
-    public void bust(Player player) {
-        printToConsole(format("%s is bust with %d points!", player.getName(), player.getPoints()));
-    }
-
-    @Override
     public void notifyIfBusted(Player player) {
         if (player.isBusted()) {
             printToConsole(format("%s is bust with %d points!", player.getName(), player.getPoints()));
