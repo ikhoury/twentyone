@@ -23,12 +23,11 @@ public class GameEngine implements Runnable {
     private final Bank bank;
     private final Collection<Player> players;
     private final InteractionDriver interactionDriver;
-    private final TurnEngine turnEngine;
 
     private final TurnStrategy playerStrategy;
     private final TurnStrategy bankStrategy;
 
-    public GameEngine(Bank bank, Collection<Player> players, InteractionDriver interactionDriver, TurnEngine turnEngine,
+    public GameEngine(Bank bank, Collection<Player> players, InteractionDriver interactionDriver,
                       TurnStrategy playerStrategy, TurnStrategy bankStrategy) {
         if (players.size() > MAX_PLAYERS_PER_GAME) {
             throw new IllegalArgumentException("Number of players exceeds " + MAX_PLAYERS_PER_GAME);
@@ -37,7 +36,6 @@ public class GameEngine implements Runnable {
         this.bank = bank;
         this.players = players;
         this.interactionDriver = interactionDriver;
-        this.turnEngine = turnEngine;
         this.playerStrategy = playerStrategy;
         this.bankStrategy = bankStrategy;
     }

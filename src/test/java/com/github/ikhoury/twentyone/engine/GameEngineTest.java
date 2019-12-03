@@ -28,8 +28,6 @@ public class GameEngineTest {
     @Mock
     private InteractionDriver interactionDriver;
     @Mock
-    private TurnEngine turnEngine;
-    @Mock
     private TurnStrategy strategy;
 
     private GameEngine gameEngine;
@@ -39,12 +37,12 @@ public class GameEngineTest {
         List<Player> players = new ArrayList<>();
         players.add(player);
 
-        gameEngine = new GameEngine(bank, players, interactionDriver, turnEngine, strategy, strategy);
+        gameEngine = new GameEngine(bank, players, interactionDriver, strategy, strategy);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotCreateGameMoreThanMaxPlayers() {
-        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, turnEngine, strategy, strategy);
+        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
     }
 
     @Test
@@ -74,7 +72,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, never()).playTurn(bank);
+        verify(strategy, never()).playTurn(bank);
         verify(interactionDriver).winAll(bank);
     }
 
