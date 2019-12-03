@@ -29,6 +29,8 @@ public interface InteractionDriver {
 
     void bust(Player player);
 
+    void notifyIfBusted(Player player);
+
     void win(Player won, Player lost);
 
     void winAll(Player won);
