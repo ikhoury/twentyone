@@ -52,16 +52,6 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
     }
 
     @Test
-    public void bustPlayerIfGetsBusted() {
-        when(interactionDriver.askChoiceFrom(player))
-                .thenReturn(PlayerChoice.HIT);
-
-        strategy.playTurn(player);
-
-        verify(interactionDriver).notifyIfBusted(player);
-    }
-
-    @Test
     public void playerChoosesStand() {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.STAND);

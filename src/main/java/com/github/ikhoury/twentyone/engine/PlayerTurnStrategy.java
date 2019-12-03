@@ -34,8 +34,6 @@ public class PlayerTurnStrategy implements TurnStrategy {
                 split(player, splitCard);
                 break;
         }
-
-        interactionDriver.notifyIfBusted(player);
     }
 
     private void hit(Player player, Card card) {

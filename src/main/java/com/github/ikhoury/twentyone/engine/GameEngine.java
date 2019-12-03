@@ -60,13 +60,17 @@ public class GameEngine implements Runnable {
 
         do {
             playing = findPlayersThatAre(STILL_PLAYING);
-            playing.forEach(playerStrategy::playTurn);
+            playing.forEach(player -> {
+                playerStrategy.playTurn(player);
+                interactionDriver.notifyIfBusted(player);
+            });
         } while (!playing.isEmpty());
     }
 
     private void playBankTurn() {
         while (bank.canHit()) {
             bankStrategy.playTurn(bank);
+            interactionDriver.notifyIfBusted(bank);
         }
     }
 

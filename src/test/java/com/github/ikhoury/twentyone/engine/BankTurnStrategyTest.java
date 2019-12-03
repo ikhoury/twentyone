@@ -73,11 +73,4 @@ public class BankTurnStrategyTest extends AbstractTurnStrategyTest {
 
         verify(bank).hit(CARD_WITH_MORE_THAN_ONE_POINTS, expectedPoints);
     }
-
-    @Test
-    public void bustBankIfGetsBusted() {
-        strategy.playTurn(bank);
-
-        verify(interactionDriver).notifyIfBusted(bank);
-    }
 }

@@ -23,7 +23,6 @@ public class BankTurnStrategy implements TurnStrategy {
     @Override
     public void playTurn(Player player) {
         deck.nextCard().ifPresent(card -> hit(player, card));
-        interactionDriver.notifyIfBusted(player);
     }
 
     private void hit(Player player, Card card) {
