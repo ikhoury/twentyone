@@ -65,7 +65,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(turnEngine, times(2)).playTurn(bank);
+        verify(strategy, times(2)).playTurn(bank);
     }
 
     @Test

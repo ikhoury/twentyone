@@ -68,7 +68,7 @@ public class GameEngine implements Runnable {
 
     private void playBankTurn() {
         while (bank.canHit()) {
-            turnEngine.playTurn(bank);
+            bankStrategy.playTurn(bank);
         }
     }
 
