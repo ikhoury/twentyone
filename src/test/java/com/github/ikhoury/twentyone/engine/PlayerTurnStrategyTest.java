@@ -49,6 +49,8 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
         when(deck.nextCard()).thenReturn(Optional.empty());
 
         strategy.playTurn(player);
+
+        verifyNoInteractions(player);
     }
 
     @Test
