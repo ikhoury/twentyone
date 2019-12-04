@@ -1,4 +1,4 @@
-package com.github.ikhoury.twentyone.engine;
+package com.github.ikhoury.twentyone.strategy;
 
 import com.github.ikhoury.twentyone.deck.Card;
 import com.github.ikhoury.twentyone.deck.Deck;

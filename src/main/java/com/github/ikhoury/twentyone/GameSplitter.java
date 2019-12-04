@@ -2,12 +2,12 @@ package com.github.ikhoury.twentyone;
 
 import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.driver.InteractionDriver;
-import com.github.ikhoury.twentyone.engine.BankTurnStrategy;
 import com.github.ikhoury.twentyone.engine.GameEngine;
-import com.github.ikhoury.twentyone.engine.PlayerTurnStrategy;
-import com.github.ikhoury.twentyone.engine.TurnStrategy;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
+import com.github.ikhoury.twentyone.strategy.BankTurnStrategy;
+import com.github.ikhoury.twentyone.strategy.PlayerTurnStrategy;
+import com.github.ikhoury.twentyone.strategy.TurnStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

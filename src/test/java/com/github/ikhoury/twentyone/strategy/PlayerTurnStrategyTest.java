@@ -1,4 +1,4 @@
-package com.github.ikhoury.twentyone.engine;
+package com.github.ikhoury.twentyone.strategy;
 
 import com.github.ikhoury.twentyone.driver.PlayerChoice;
 import com.github.ikhoury.twentyone.player.Player;
