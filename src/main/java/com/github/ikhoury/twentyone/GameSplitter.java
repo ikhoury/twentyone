@@ -24,15 +24,15 @@ class GameSplitter {
         List<GameEngine> gameEngines = new ArrayList<>();
         List<Player> playersChunk;
 
+        TurnStrategy playerStrategy = new PlayerTurnStrategy(interactionDriver);
+        TurnStrategy bankStrategy = new BankTurnStrategy(interactionDriver);
+
         while (!players.isEmpty()) {
             playersChunk = players.size() > MAX_PLAYERS_PER_GAME ? players.subList(0, MAX_PLAYERS_PER_GAME) : players;
 
             List<Player> currentPlayers = new ArrayList<>(playersChunk);
             Deck deck = new Deck();
             Bank bank = new Bank();
-
-            TurnStrategy playerStrategy = new PlayerTurnStrategy(interactionDriver);
-            TurnStrategy bankStrategy = new BankTurnStrategy(interactionDriver);
 
             GameEngine gameEngine = new GameEngine(deck, bank, currentPlayers, interactionDriver, playerStrategy, bankStrategy);
 
