@@ -50,6 +50,11 @@ public class GameEngineTest {
     }
 
     @Test
+    public void shufflesDeckOnStart() {
+        verify(deck).shuffleCards();
+    }
+
+    @Test
     public void playsPlayerTurnWhileCanHit() {
         // Can hit two times then stops
         when(player.canHit()).thenReturn(true, true, false);

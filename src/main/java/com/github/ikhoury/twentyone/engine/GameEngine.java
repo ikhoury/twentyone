@@ -36,6 +36,8 @@ public class GameEngine implements Runnable {
             throw new IllegalArgumentException("Number of players exceeds " + MAX_PLAYERS_PER_GAME);
         }
 
+        deck.shuffleCards();
+
         this.deck = deck;
         this.bank = bank;
         this.players = players;
