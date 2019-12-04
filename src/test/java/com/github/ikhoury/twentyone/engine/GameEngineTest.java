@@ -1,5 +1,6 @@
 package com.github.ikhoury.twentyone.engine;
 
+import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.driver.InteractionDriver;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
@@ -23,6 +24,8 @@ public class GameEngineTest {
     private static final int PLAYER_POINTS = 10;
 
     @Mock
+    private Deck deck;
+    @Mock
     private Player player;
     @Mock
     private Bank bank;
@@ -38,12 +41,12 @@ public class GameEngineTest {
         List<Player> players = new ArrayList<>();
         players.add(player);
 
-        gameEngine = new GameEngine(bank, players, interactionDriver, strategy, strategy);
+        gameEngine = new GameEngine(deck, bank, players, interactionDriver, strategy, strategy);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotCreateGameMoreThanMaxPlayers() {
-        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
+        new GameEngine(deck, bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
     }
 
     @Test

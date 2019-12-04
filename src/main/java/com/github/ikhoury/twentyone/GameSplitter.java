@@ -36,7 +36,7 @@ class GameSplitter {
             TurnStrategy playerStrategy = new PlayerTurnStrategy(deck, interactionDriver);
             TurnStrategy bankStrategy = new BankTurnStrategy(deck, interactionDriver);
 
-            GameEngine gameEngine = new GameEngine(bank, currentPlayers, interactionDriver, playerStrategy, bankStrategy);
+            GameEngine gameEngine = new GameEngine(deck, bank, currentPlayers, interactionDriver, playerStrategy, bankStrategy);
 
             gameEngines.add(gameEngine);
             playersChunk.clear();
