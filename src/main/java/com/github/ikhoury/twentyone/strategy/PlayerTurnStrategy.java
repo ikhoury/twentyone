@@ -10,16 +10,14 @@ import static com.github.ikhoury.twentyone.Constants.AVAILABLE_TURNS_AFTER_SPLIT
 
 public class PlayerTurnStrategy implements TurnStrategy {
 
-    private final Deck deck;
     private final InteractionDriver interactionDriver;
 
-    public PlayerTurnStrategy(Deck deck, InteractionDriver interactionDriver) {
-        this.deck = deck;
+    public PlayerTurnStrategy(InteractionDriver interactionDriver) {
         this.interactionDriver = interactionDriver;
     }
 
     @Override
-    public void playTurn(Player player) {
+    public void playTurn(Player player, Deck deck) {
         PlayerChoice choice = interactionDriver.askChoiceFrom(player);
 
         switch (choice) {
@@ -31,7 +29,7 @@ public class PlayerTurnStrategy implements TurnStrategy {
                 break;
             case SPLIT:
                 Card splitCard = interactionDriver.chooseCardToSplitFor(player);
-                split(player, splitCard);
+                split(deck, player, splitCard);
                 break;
         }
     }
@@ -42,12 +40,12 @@ public class PlayerTurnStrategy implements TurnStrategy {
         interactionDriver.showHitCardAndPoints(player, card, points);
     }
 
-    private void split(Player player, Card card) {
+    private void split(Deck deck, Player player, Card card) {
         player.split(card);
         interactionDriver.showSplitCardAndPoints(player, card);
 
         for (int i = 0; i < AVAILABLE_TURNS_AFTER_SPLIT; i++) {
-            playTurn(player);
+            playTurn(player, deck);
 
             if (!player.canHit()) {
                 break;

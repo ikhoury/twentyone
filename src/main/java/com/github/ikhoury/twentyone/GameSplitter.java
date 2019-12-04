@@ -33,8 +33,8 @@ class GameSplitter {
 
             deck.shuffleCards();
 
-            TurnStrategy playerStrategy = new PlayerTurnStrategy(deck, interactionDriver);
-            TurnStrategy bankStrategy = new BankTurnStrategy(deck, interactionDriver);
+            TurnStrategy playerStrategy = new PlayerTurnStrategy(interactionDriver);
+            TurnStrategy bankStrategy = new BankTurnStrategy(interactionDriver);
 
             GameEngine gameEngine = new GameEngine(deck, bank, currentPlayers, interactionDriver, playerStrategy, bankStrategy);
 

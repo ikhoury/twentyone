@@ -65,7 +65,7 @@ public class GameEngine implements Runnable {
         do {
             playing = findPlayersThatAre(STILL_PLAYING);
             playing.forEach(player -> {
-                playerStrategy.playTurn(player);
+                playerStrategy.playTurn(player, deck);
                 interactionDriver.notifyIfBusted(player);
             });
         } while (!playing.isEmpty());
@@ -73,7 +73,7 @@ public class GameEngine implements Runnable {
 
     private void playBankTurn() {
         while (bank.canHit()) {
-            bankStrategy.playTurn(bank);
+            bankStrategy.playTurn(bank, deck);
             interactionDriver.notifyIfBusted(bank);
         }
     }

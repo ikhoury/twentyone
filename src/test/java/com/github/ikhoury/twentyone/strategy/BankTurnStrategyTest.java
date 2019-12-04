@@ -36,7 +36,7 @@ public class BankTurnStrategyTest extends AbstractTurnStrategyTest {
         when(bank.getPoints()).thenReturn(0);
         when(deck.nextCard()).thenReturn(Optional.of(CARD_WITH_MORE_THAN_ONE_POINTS));
 
-        strategy.playTurn(bank);
+        strategy.playTurn(bank, deck);
 
         verify(bank).hit(CARD_WITH_MORE_THAN_ONE_POINTS, expectedPoints);
     }
@@ -48,7 +48,7 @@ public class BankTurnStrategyTest extends AbstractTurnStrategyTest {
         when(bank.getPoints()).thenReturn(BUST_THRESHOLD - expectedPoints);
         when(deck.nextCard()).thenReturn(Optional.of(CARD_WITH_MORE_THAN_ONE_POINTS));
 
-        strategy.playTurn(bank);
+        strategy.playTurn(bank, deck);
 
         verify(bank).hit(CARD_WITH_MORE_THAN_ONE_POINTS, expectedPoints);
     }
@@ -57,7 +57,7 @@ public class BankTurnStrategyTest extends AbstractTurnStrategyTest {
     public void bankWithPointsAtBustThresholdStillHits() {
         when(bank.getPoints()).thenReturn(BUST_THRESHOLD);
 
-        strategy.playTurn(bank);
+        strategy.playTurn(bank, deck);
 
         verify(bank).hit(any(Card.class), anyInt());
     }
@@ -69,7 +69,7 @@ public class BankTurnStrategyTest extends AbstractTurnStrategyTest {
         when(bank.getPoints()).thenReturn(BUST_THRESHOLD + 1);
         when(deck.nextCard()).thenReturn(Optional.of(CARD_WITH_MORE_THAN_ONE_POINTS));
 
-        strategy.playTurn(bank);
+        strategy.playTurn(bank, deck);
 
         verify(bank).hit(CARD_WITH_MORE_THAN_ONE_POINTS, expectedPoints);
     }

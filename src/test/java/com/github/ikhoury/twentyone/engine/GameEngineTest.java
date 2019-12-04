@@ -56,7 +56,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, times(2)).playTurn(player);
+        verify(strategy, times(2)).playTurn(player, deck);
         verify(interactionDriver, times(2)).notifyIfBusted(player);
     }
 
@@ -68,7 +68,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, times(2)).playTurn(bank);
+        verify(strategy, times(2)).playTurn(bank, deck);
         verify(interactionDriver, times(2)).notifyIfBusted(bank);
     }
 
@@ -78,7 +78,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, never()).playTurn(bank);
+        verify(strategy, never()).playTurn(bank, deck);
         verify(interactionDriver).winAll(bank);
     }
 
