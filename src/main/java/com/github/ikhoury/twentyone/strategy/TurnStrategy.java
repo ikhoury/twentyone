@@ -1,5 +1,6 @@
-package com.github.ikhoury.twentyone.engine;
+package com.github.ikhoury.twentyone.strategy;
 
+import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.player.Player;
 
 /**
@@ -7,5 +8,5 @@ import com.github.ikhoury.twentyone.player.Player;
  */
 public interface TurnStrategy {
 
-    void playTurn(Player player);
+    void playTurn(Player player, Deck deck);
 }

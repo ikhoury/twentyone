@@ -1,8 +1,10 @@
 package com.github.ikhoury.twentyone.engine;
 
+import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.driver.InteractionDriver;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
+import com.github.ikhoury.twentyone.strategy.TurnStrategy;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +24,8 @@ public class GameEngineTest {
     private static final int PLAYER_POINTS = 10;
 
     @Mock
+    private Deck deck;
+    @Mock
     private Player player;
     @Mock
     private Bank bank;
@@ -37,12 +41,17 @@ public class GameEngineTest {
         List<Player> players = new ArrayList<>();
         players.add(player);
 
-        gameEngine = new GameEngine(bank, players, interactionDriver, strategy, strategy);
+        gameEngine = new GameEngine(deck, bank, players, interactionDriver, strategy, strategy);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotCreateGameMoreThanMaxPlayers() {
-        new GameEngine(bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
+        new GameEngine(deck, bank, createPlayersMoreThanAllowed(), interactionDriver, strategy, strategy);
+    }
+
+    @Test
+    public void shufflesDeckOnStart() {
+        verify(deck).shuffleCards();
     }
 
     @Test
@@ -52,7 +61,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, times(2)).playTurn(player);
+        verify(strategy, times(2)).playTurn(player, deck);
         verify(interactionDriver, times(2)).notifyIfBusted(player);
     }
 
@@ -64,7 +73,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, times(2)).playTurn(bank);
+        verify(strategy, times(2)).playTurn(bank, deck);
         verify(interactionDriver, times(2)).notifyIfBusted(bank);
     }
 
@@ -74,7 +83,7 @@ public class GameEngineTest {
 
         gameEngine.run();
 
-        verify(strategy, never()).playTurn(bank);
+        verify(strategy, never()).playTurn(bank, deck);
         verify(interactionDriver).winAll(bank);
     }
 

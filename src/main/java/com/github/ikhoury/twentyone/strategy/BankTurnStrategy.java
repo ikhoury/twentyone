@@ -1,4 +1,4 @@
-package com.github.ikhoury.twentyone.engine;
+package com.github.ikhoury.twentyone.strategy;
 
 import com.github.ikhoury.twentyone.deck.Card;
 import com.github.ikhoury.twentyone.deck.Deck;
@@ -12,16 +12,14 @@ import static com.github.ikhoury.twentyone.Constants.BUST_THRESHOLD;
 
 public class BankTurnStrategy implements TurnStrategy {
 
-    private final Deck deck;
     private final InteractionDriver interactionDriver;
 
-    public BankTurnStrategy(Deck deck, InteractionDriver interactionDriver) {
-        this.deck = deck;
+    public BankTurnStrategy(InteractionDriver interactionDriver) {
         this.interactionDriver = interactionDriver;
     }
 
     @Override
-    public void playTurn(Player player) {
+    public void playTurn(Player player, Deck deck) {
         deck.nextCard().ifPresent(card -> hit(player, card));
     }
 

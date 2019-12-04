@@ -1,8 +1,10 @@
 package com.github.ikhoury.twentyone.engine;
 
+import com.github.ikhoury.twentyone.deck.Deck;
 import com.github.ikhoury.twentyone.driver.InteractionDriver;
 import com.github.ikhoury.twentyone.player.Bank;
 import com.github.ikhoury.twentyone.player.Player;
+import com.github.ikhoury.twentyone.strategy.TurnStrategy;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -20,6 +22,7 @@ public class GameEngine implements Runnable {
     private static final Predicate<Player> STILL_STANDING = Player::isStanding;
     private static final Predicate<Player> STILL_PLAYING = Player::canHit;
 
+    private final Deck deck;
     private final Bank bank;
     private final Collection<Player> players;
     private final InteractionDriver interactionDriver;
@@ -27,12 +30,15 @@ public class GameEngine implements Runnable {
     private final TurnStrategy playerStrategy;
     private final TurnStrategy bankStrategy;
 
-    public GameEngine(Bank bank, Collection<Player> players, InteractionDriver interactionDriver,
+    public GameEngine(Deck deck, Bank bank, Collection<Player> players, InteractionDriver interactionDriver,
                       TurnStrategy playerStrategy, TurnStrategy bankStrategy) {
         if (players.size() > MAX_PLAYERS_PER_GAME) {
             throw new IllegalArgumentException("Number of players exceeds " + MAX_PLAYERS_PER_GAME);
         }
 
+        deck.shuffleCards();
+
+        this.deck = deck;
         this.bank = bank;
         this.players = players;
         this.interactionDriver = interactionDriver;
@@ -61,7 +67,7 @@ public class GameEngine implements Runnable {
         do {
             playing = findPlayersThatAre(STILL_PLAYING);
             playing.forEach(player -> {
-                playerStrategy.playTurn(player);
+                playerStrategy.playTurn(player, deck);
                 interactionDriver.notifyIfBusted(player);
             });
         } while (!playing.isEmpty());
@@ -69,7 +75,7 @@ public class GameEngine implements Runnable {
 
     private void playBankTurn() {
         while (bank.canHit()) {
-            bankStrategy.playTurn(bank);
+            bankStrategy.playTurn(bank, deck);
             interactionDriver.notifyIfBusted(bank);
         }
     }

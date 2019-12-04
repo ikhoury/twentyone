@@ -1,4 +1,4 @@
-package com.github.ikhoury.twentyone.engine;
+package com.github.ikhoury.twentyone.strategy;
 
 import com.github.ikhoury.twentyone.driver.PlayerChoice;
 import com.github.ikhoury.twentyone.player.Player;
@@ -36,7 +36,7 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.HIT);
 
-        strategy.playTurn(player);
+        strategy.playTurn(player, deck);
 
         verify(player).hit(NEXT_CARD, CHOSEN_POINTS);
         verify(interactionDriver).showHitCardAndPoints(player, NEXT_CARD, CHOSEN_POINTS);
@@ -48,7 +48,7 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
                 .thenReturn(PlayerChoice.HIT);
         when(deck.nextCard()).thenReturn(Optional.empty());
 
-        strategy.playTurn(player);
+        strategy.playTurn(player, deck);
 
         verifyNoInteractions(player);
     }
@@ -58,7 +58,7 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
         when(interactionDriver.askChoiceFrom(player))
                 .thenReturn(PlayerChoice.STAND);
 
-        strategy.playTurn(player);
+        strategy.playTurn(player, deck);
 
         verify(player).stand();
     }
@@ -71,7 +71,7 @@ public class PlayerTurnStrategyTest extends AbstractTurnStrategyTest {
                 .thenReturn(NEXT_CARD);
         when(player.canHit()).thenReturn(true);
 
-        strategy.playTurn(player);
+        strategy.playTurn(player, deck);
 
         verify(player).split(NEXT_CARD);
         verify(interactionDriver).showSplitCardAndPoints(player, NEXT_CARD);
