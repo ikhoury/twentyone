@@ -37,3 +37,11 @@ You will get a runnable `JAR` created under the `target/` folder ending with the
 Run the game using `java -jar`.
 
 **NOTE**: Java version 11 is required.
+
+### Docker
+
+You can optionally start the game by building the docker image and running it using:
+
+```shell script
+docker build -t twentyone:latest . && docker run -it --rm twentyone:latest
+```
